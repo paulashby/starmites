@@ -16,11 +16,18 @@ BasicGame.Preloader.prototype = {
 		this.background.width = BasicGame.srx;
 		this.preloadBar.width = BasicGame.srx;
 		this.load.setPreloadSprite(this.preloadBar);		
-		this.load.bitmapFont('fontName', 'assets/' + BasicGame.screen + '/fontName/fontName.png', 'assets/' + BasicGame.screen + '/fontName/fontName.fnt');
+		this.load.bitmapFont('Lilita', 'assets/' + BasicGame.screen + '/Lilita/Lilita.png', 'assets/' + BasicGame.screen + '/Lilita/Lilita.fnt');
 		this.load.audio('bgLoop', ['assets/audio/primitive/bgLoop.mp3', 'assets/audio/primitive/bgLoop.ogg']);
 		
 		this.load.image('imageName','assets/' + BasicGame.screen + '/imageName.png');
-		this.load.spritesheet('imageName', 'assets/' + BasicGame.screen + '/imageName.png', BasicGame.imageWidth, BasicGame.imageHeight, 3);  
+		this.load.spritesheet('imageName', 'assets/' + BasicGame.screen + '/imageName.png', BasicGame.imageWidth, BasicGame.imageHeight, 3);
+		
+		this.load.image('background','assets/' + BasicGame.screen + '/background.png');
+		this.load.image('playBttn','assets/' + BasicGame.screen + '/playBttn.png');
+		this.load.image('next','assets/' + BasicGame.screen + '/next.png');
+		this.load.image('stackAntyGravity','assets/' + BasicGame.screen + '/stackAntyGravity.png');
+		this.load.image('stackSpotted','assets/' + BasicGame.screen + '/stackSpotted.png');
+		this.load.image('stackHotLarva','assets/' + BasicGame.screen + '/stackHotLarva.png');  
 	},
 
 	create: function () {
