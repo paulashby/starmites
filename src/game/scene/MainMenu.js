@@ -8,35 +8,65 @@ BasicGame.MainMenu = function (game) {
 BasicGame.MainMenu.prototype = {
 
 	create: function () {
-		this.background = this.game.add.sprite(0,0, 'background');
-		this.background.inputEnabled = true;
-		this.background.events.onInputDown.add(this.onTap, this);
-		this.gameDetails = this.add.group();
+		this.gameAssets = [ 
+		[ ['It\'s ants vs gravity and', 'the ants are losing. Use', 'your sense of timing to', 'save the little guys', 'from the frazzler!'], 'stackAntyGravity', 'http://www.primitive.co/antygravity/'],
+		[ ['Sleepy grubs look cute', 'but appearances can be', 'deceptive. Get them', 'before they get you!'], 'stackSpotted', 'http://www.primitive.co/spotted/'],
+		[ ['This lively little larva', 'is too close to the lava.', 'If he persits with gem–', 'based risks, he’ll end', 'up a cadaver.'], 'stackHotLarva', 'http://www.primitive.co/hotlarva/']
+		];
+		this.textX = undefined;
+		this.lineHeight = undefined;
 		
-		this.stackAntyGravity = this.game.add.sprite(BasicGame.gameWidth * 0.025, BasicGame.gameHeight * 0.35, 'stackAntyGravity');
-		this.stackSpotted = this.game.add.sprite(this.stackAntyGravity.x + BasicGame.gameWidth,0, 'stackSpotted');
-		this.stackHotLarva = this.game.add.sprite(this.stackAntyGravity.x + BasicGame.gameWidth * 2,0, 'stackHotLarva');
+		this.background = this.game.add.sprite(0,0, 'background');
+		this.nextBttn = this.game.add.sprite(BasicGame.gameWidth * 0.9, BasicGame.viewHeight * 0.1, 'next');
+		this.gameDetails = this.add.group();
+		this.gameGroups = [];
+		
+		// =======================================================================================================
+		// = Add group for each game, populate with content then offset horizontally to make space for next game =
+		// =======================================================================================================
+		
+		for(i = 0; i < this.gameAssets.length; i++){
+			this.gameGroups[i] = this.add.group();
+			this.setGameText(i);
+
+			var playBttnBG = this.game.add.sprite(this.textX, this.gameGroups[i].getTop().y + this.lineHeight * 1.3, 'playBttn');
+			playBttnBG.inputEnabled = true;
+			playBttnBG.gameURL = this.gameAssets[i][2] 
+			playBttnBG.events.onInputDown.add(this.onPlay, this);
+			var playLabel = this.game.add.bitmapText(this.textX, 0, 'Lilita', 'PLAY', BasicGame.fntSize);
+			playLabel.y = playBttnBG.y + ((playBttnBG.height - playLabel.height)/2);
+			playLabel.x = playBttnBG.x + ((playBttnBG.width - playLabel.width)/2);
+			this.gameGroups[i].add(playBttnBG);
+			this.gameGroups[i].add(playLabel);
+
+			this.gameGroups[i].add(this.game.add.sprite(BasicGame.gameWidth * 0.025, BasicGame.gameHeight * 0.35, this.gameAssets[i][1]));
+			this.gameGroups[i].x = BasicGame.gameWidth * i +1;
+		}
+	},
+	setGameText: function(gameNum) {
+		
+		// ==========================================================
+		// = Populate group with content for this.gameAssets[gameNum] =
+		// ==========================================================
 		
 		this.textX = BasicGame.gameWidth * 0.57;
-		this.agLine1 = this.game.add.bitmapText(this.textX, BasicGame.viewHeight * 0.42, 'Lilita', 'It\'s ants vs gravity and', BasicGame.fntSize);
-		this.lineHeight = this.agLine1.height * 1.25;
-		this.agLine2 = this.game.add.bitmapText(this.textX, this.agLine1.y + this.lineHeight, 'Lilita', 'the ants are losing. Use', BasicGame.fntSize);
-		this.agLine3 = this.game.add.bitmapText(this.textX, this.agLine2.y + this.lineHeight, 'Lilita', 'your sense of timing to', BasicGame.fntSize);
-		this.agLine4 = this.game.add.bitmapText(this.textX, this.agLine3.y + this.lineHeight, 'Lilita', 'save the little guys', BasicGame.fntSize);
-		this.agLine5 = this.game.add.bitmapText(this.textX, this.agLine4.y + this.lineHeight, 'Lilita', 'from the frazzler!', BasicGame.fntSize);
-		
-		this.agPlayBttnBG = this.game.add.sprite(this.textX, this.agLine5.y + this.lineHeight * 1.3, 'playBttn');
-		this.agPlayLabel = this.game.add.bitmapText(this.textX, 0, 'Lilita', 'Play', BasicGame.fntSize);
-		this.agPlayLabel.y = this.agPlayBttnBG.y + ((this.agPlayBttnBG.height - this.agPlayLabel.height)/2);
-		this.agPlayLabel.x = this.agPlayBttnBG.x + ((this.agPlayBttnBG.width - this.agPlayLabel.width)/2); 
-		  
+		this.lineHeight;
+		for(j = 0; j < this.gameAssets[gameNum][0].length; j++){
+			if(j == 0){
+				this.gameGroups[gameNum].add(this.game.add.bitmapText(this.textX, BasicGame.viewHeight * 0.42, 'Lilita', this.gameAssets[gameNum][0][j], BasicGame.fntSize));
+				this.lineHeight = this.gameGroups[gameNum].getTop().height * 1.25;
+			}
+			else{
+				this.gameGroups[gameNum].add(this.game.add.bitmapText(this.textX, this.gameGroups[gameNum].getTop().y + this.lineHeight, 'Lilita', this.gameAssets[gameNum][0][j], BasicGame.fntSize));
+			}
+		}
 	},
 	shutdown: function(){
 	},
 	onTap: function() {
-	window.location.href = 'http://www.primitive.co/antygravity/';	
+		
 	},
-	onPlay: function(game) { 
-
+	onPlay: function(eTarget) { 
+		window.location.href = eTarget.gameURL;
 	}
 };
