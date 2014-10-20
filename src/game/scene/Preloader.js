@@ -15,10 +15,14 @@ BasicGame.Preloader.prototype = {
 		this.preloadBar = this.add.sprite(0, 0, 'preloaderBar');
 		this.background.width = BasicGame.srx;
 		this.preloadBar.width = BasicGame.srx;
-		this.load.setPreloadSprite(this.preloadBar);		
-		this.load.bitmapFont('Lilita', 'assets/' + BasicGame.screen + '/Lilita/Lilita.png', 'assets/' + BasicGame.screen + '/Lilita/Lilita.fnt');
+		this.load.setPreloadSprite(this.preloadBar);
+				
+		this.load.bitmapFont('LilitaPrime8', 'assets/' + BasicGame.screen + '/LilitaPrime8/LilitaPrime8.png', 'assets/' + BasicGame.screen + '/LilitaPrime8/LilitaPrime8.fnt');
+		
+		this.load.audio('swoosh', ['assets/audio/primitive/swoosh.mp3', 'assets/audio/primitive/swoosh.ogg']);
 		
 		this.load.image('background','assets/' + BasicGame.screen + '/background.png');
+		this.load.image('logo','assets/' + BasicGame.screen + '/logo.png');
 		this.load.image('playBttn','assets/' + BasicGame.screen + '/playBttn.png');
 		this.load.image('next','assets/' + BasicGame.screen + '/next.png');
 		this.load.image('stackAntyGravity','assets/' + BasicGame.screen + '/stackAntyGravity.png');

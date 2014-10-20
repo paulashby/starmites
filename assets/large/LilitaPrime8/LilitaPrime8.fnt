@@ -4,7 +4,7 @@
   <pages>
     <page id="0" file="Lilita.png"/>
   </pages>
-  <chars count="56">
+  <chars count="57">
     <char id="97" x="2" y="2" width="14" height="14" xoffset="0" yoffset="5" xadvance="14" page="0" chnl="15"/>
     <char id="98" x="2" y="18" width="12" height="20" xoffset="1" yoffset="0" xadvance="14" page="0" chnl="15"/>
     <char id="99" x="2" y="40" width="11" height="14" xoffset="1" yoffset="5" xadvance="11" page="0" chnl="15"/>
@@ -60,7 +60,8 @@
     <char id="33" x="2" y="275" width="5" height="20" xoffset="1" yoffset="0" xadvance="8" page="0" chnl="15"/>
     <char id="39" x="65" y="24" width="4" height="8" xoffset="2" yoffset="0" xadvance="8" page="0" chnl="15"/>
     <char id="46" x="55" y="81" width="5" height="6" xoffset="1" yoffset="14" xadvance="6" page="0" chnl="15"/>
-    <char id="8211" x="43" y="34" width="10" height="3" xoffset="1" yoffset="11" xadvance="13" page="0" chnl="15"/>
+    <char id="44" x="62" y="103" width="7" height="8" xoffset="1" yoffset="15" xadvance="8" page="0" chnl="15"/>
+    <char id="45" x="43" y="34" width="13" height="3" xoffset="1" yoffset="11" xadvance="14" page="0" chnl="15"/>
     <char id="32" x="0" y="0" width="0" height="0" xoffset="1" yoffset="11" xadvance="5" page="0" chnl="15"/>
   </chars>
 </font>

@@ -1,0 +1,87 @@
+
+STAR MITES
+----------
+Fonts:
+------
+LilitaPrime8, based on Lilita by Juan Montoreano,
+available from Google Fonts https://www.google.com/fonts.
+Please see accompanying license.
+
+Sounds:
+-------
+Swoosh sound: Multiple Swooshes by lsprings.
+Distributed by http://freesound.org.
+This work is licensed under the Creative Commons 0 License
+http://creativecommons.org/publicdomain/zero/1.0/
+
+Phaser:
+-------
+
+ANTY GRAVITY
+------------
+Fonts:
+------
+Lightdot 7x6 by very kind permission of Melissa Fernandes, 
+available from http://www.dafont.com
+
+BoogalooPrime8, based on Boogaloo by John Vargas Beltrán,
+available from Google Fonts https://www.google.com/fonts.
+Please see accompanying license.
+
+Sounds:
+-------
+Background music: mouse organ#2 used by very kind permission of Timbre. 
+Distributed by http://freesound.org.
+
+All other sounds made with the bfxr sound creator
+http://www.bfxr.net/
+
+SPOTTED:
+-------
+Fonts:
+------
+LuckiestGuyPrime8, based on Luckiest Guy by Brian J. Bonislawsky,
+available from Google Fonts https://www.google.com/fonts.
+Please see accompanying license.
+
+Sounds:
+-------
+Background music: Bugout by Paul Ashby
+
+All other sounds made with the bfxr sound creator
+http://www.bfxr.net/
+
+HOT LARVA:
+----------
+Fonts:
+------
+SlackeyPrime8, based on Slackey by Dave Cohen at Sideshow Foundry,
+available from Google Fonts https://www.google.com/fonts.
+Please see accompanying license.
+
+Sounds
+------
+Background music: SpaceBallDownTheWell by symphoid.
+Distributed by http://freesound.org.
+This work is licensed under the Creative Commons 0 License
+http://creativecommons.org/publicdomain/zero/1.0/
+
+Pop sound: Pop 2 by greenvwbeetle.
+Distributed by http://freesound.org.
+This work is licensed under the Creative Commons 0 License
+http://creativecommons.org/publicdomain/zero/1.0/
+
+Sizzle sound: cig_extinguish by the_semen_incident.
+Distributed by http://freesound.org.
+This work is licensed under the Creative Commons 0 License
+http://creativecommons.org/publicdomain/zero/1.0/
+
+Dying laugh: Jared Helm by oldedgar.
+Distributed by http://freesound.org.
+This work is licensed under the Creative Commons 0 License
+http://creativecommons.org/publicdomain/zero/1.0/
+
+Grunt sound, Yes!, hotfoot sound by Paul Ashby
+
+All other sounds made with the bfxr sound creator
+http://www.bfxr.net/

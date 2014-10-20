@@ -42,10 +42,6 @@
 	<script src="src/game/scene/Boot.js"></script>
 	<script src="src/game/scene/Preloader.js"></script>
 	<script src="src/game/scene/MainMenu.js"></script>
-	<script src="src/game/scene/Instructions.js"></script>
-	<script src="src/game/scene/Game.js"></script>
-	<script src="src/game/scene/GameOver.js"></script>     
-	
 	
 	
 </head>
@@ -74,7 +70,6 @@
 	var assetListing = [
 		['fntSize', 18.5] 
 	];
-
 		
   if(BasicGame.srx >= 360){
 		BasicGame.screen = "small";
@@ -134,9 +129,6 @@
 	game.state.add('Boot', BasicGame.Boot);
 	game.state.add('Preloader', BasicGame.Preloader);
 	game.state.add('MainMenu', BasicGame.MainMenu);
-	game.state.add('Instructions', BasicGame.Instructions);
-	game.state.add('Game', BasicGame.Game);
-	game.state.add('GameOver', BasicGame.GameOver);
   
 	game.state.start('Boot');
 
