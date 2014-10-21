@@ -141,6 +141,7 @@ BasicGame.MainMenu.prototype = {
 	initCredits: function(gameNum) {
 		this.makeCreditGroups(gameNum);
 		this.setCreditContent(gameNum, this.gameGroups[gameNum].gameCredits.currGameCredits);
+		this.setCreditContent(gameNum, this.gameGroups[gameNum].gameCredits.bundleCredits);
 	},
 	makeCreditGroups: function(gameNum) {
 		// ===============================================================================================
@@ -168,8 +169,8 @@ BasicGame.MainMenu.prototype = {
 		creditsPanel.events.onInputDown.add(this.onCreditPanelTap, this);
 		cGroup.add(creditsPanel);
 		
-		var creditsText = this.makeCreditBmapTxt(this.gameAssets[gameNum][3], false);
-		var bundleCreditsText = this.makeCreditBmapTxt(this.bundleCreditsTxt, true);
+		var creditsText = this.makeCreditBmapTxt(this.gameAssets[gameNum][3]);
+		var bundleCreditsText = this.makeCreditBmapTxt(this.bundleCreditsTxt);
 		
 		this.gameGroups[i].gameCredits.currGameCredits.add(creditsText);
 		
@@ -179,29 +180,36 @@ BasicGame.MainMenu.prototype = {
 		this.gameGroups[i].gameCredits.bundleCredits.add(bundleCreditsText);
 		
 		// Create a reference to the bundle text
-		this.gameGroups[i].gameCredits.bundleCredits.bundleCreditsText = bundleCreditsText;	
+		this.gameGroups[i].gameCredits.bundleCredits.bundleCreditsText = bundleCreditsText;
 		
-		// Bundle credits are initially hidden, so offset by view width
-		this.gameGroups[i].gameCredits.bundleCredits.x += BasicGame.viewWidth;	
+		this.gameGroups[i].gameCredits.bundleCredits.x = BasicGame.viewWidth;
 	},
-	makeCreditBmapTxt: function(txt, vis) {
+	makeCreditBmapTxt: function(txt) {
 		var bmapTxt = this.game.add.bitmapText(BasicGame.viewWidth * 0.05, 0, 'LilitaPrime8', txt, BasicGame.fntSize * 0.9);
 		bmapTxt.y = BasicGame.viewHeight * 1.95 - bmapTxt.height;
-		bmapTxt.visible = vis ? true : false;
 		return bmapTxt;		
 	},
 	onNext: function() {
 		if (this.creditsLabel.visible){
 			var nextTween = this.game.add.tween(this.allGames).to({x: this.allGames.x - BasicGame.gameWidth}, 300, Phaser.Easing.Cubic.InOut, true);
-			nextTween.onComplete.add(this.onNextTweenComplete, this);
+			nextTween.onComplete.add(this.onNextTweenComplete, this, this.allGames);
 		}	
 		else{
 			var currCredits  = this.allGames.getAt(0).getAt(1);
 			var nextTween = this.game.add.tween(currCredits).to({x: currCredits.x - BasicGame.gameWidth}, 300, Phaser.Easing.Cubic.InOut, true);
-			//gameCredits should be at 0
+			nextTween.onComplete.add(this.onNextTweenComplete, this, currCredits);
 		}	
 	},
-	onNextTweenComplete: function() {
+	onNextTweenComplete: function(tweenedGroup) {
+		// ========================
+		// = cycle group children =
+		// ========================
+		var justViewed = tweenedGroup.getBottom();
+		justViewed.x += tweenedGroup.length * BasicGame.gameWidth;
+		tweenedGroup.bringToTop(justViewed);
+		this.swoosh.play();
+	},
+	onNextTweenComplete_old: function() {
 		var justViewed = this.allGames.getBottom();
 		justViewed.x += this.gameAssets.length * BasicGame.gameWidth;
 		this.allGames.bringToTop(justViewed);
@@ -214,14 +222,20 @@ BasicGame.MainMenu.prototype = {
 		if (this.creditsLabel.visible) {
 			this.creditsLabel.visible = false;
 			creditsPanel.parent.parent.parent.bringToTop(creditsPanel.parent.parent);
-			this.creditsPanelOnTween = this.game.add.tween(creditsPanel.parent).to({y: -BasicGame.viewHeight}, 150, Phaser.Easing.Cubic.InOut, true);
-			this.creditsPanelOnTween.onComplete.add(function() { creditsPanel.parent.creditsText.visible = true; }, this);
+			this.creditsPanelOnTween = this.game.add.tween(creditsPanel.parent.parent).to({y: -BasicGame.viewHeight}, 150, Phaser.Easing.Cubic.InOut, true);
 		}
 		else{
-			var str = 'bollo';
-			this.creditsPanelOffTween = this.game.add.tween(creditsPanel.parent).to({y: 0}, 150, Phaser.Easing.Cubic.InOut, true);
+			this.creditsPanelOffTween = this.game.add.tween(creditsPanel.parent.parent).to({y: 0}, 150, Phaser.Easing.Cubic.InOut, true);
 			this.creditsPanelOffTween.onComplete.add(function() { this.creditsLabel.visible = true; creditsPanel.parent.parent.parent.bringToTop(creditsPanel.parent.parent.parent.gameInfo); }, this);
+			if(creditsPanel.parent.parent.getAt(0) === creditsPanel.parent.parent.bundleCredits){
+				//this.resetCredits(creditsPanel);
+				this.onNextTweenComplete(creditsPanel.parent.parent);
+				creditsPanel.parent.parent.x -= BasicGame.viewWidth;
+			}
 		}
+	},
+	resetCredits: function(creditsPanel) {
+		
 	},
 	onPlay: function(eTarget) { 
 		window.location.href = eTarget.gameURL;
