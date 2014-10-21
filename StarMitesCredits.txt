@@ -1,87 +1,55 @@
 
 STAR MITES
 ----------
-Fonts:
-------
-LilitaPrime8, based on Lilita by Juan Montoreano,
-available from Google Fonts https://www.google.com/fonts.
+Font: LilitaPrime8, based on Lilita by Juan Montoreano,
+available from Google Fonts - google.com/fonts.
 Please see accompanying license.
 
-Sounds:
--------
 Swoosh sound: Multiple Swooshes by lsprings.
-Distributed by http://freesound.org.
+Distributed by freesound.org.
 This work is licensed under the Creative Commons 0 License
-http://creativecommons.org/publicdomain/zero/1.0/
+creativecommons.org/publicdomain/zero/1.0
 
 Phaser:
 -------
+All games were created with the Phaser HTML5 game framework.
+Copyright (c) 2014 Richard Davey, Photon Storm Ltd.
+Phaser is released under the MIT License.
+opensource.org/licenses/MIT
 
-ANTY GRAVITY
-------------
-Fonts:
-------
-Lightdot 7x6 by very kind permission of Melissa Fernandes, 
-available from http://www.dafont.com
-
+ANTY GRAVITY:
+Fonts: Lightdot 7x6 by very kind permission of Melissa Fernandes, 
+available from dafont.com
 BoogalooPrime8, based on Boogaloo by John Vargas Beltrán,
-available from Google Fonts https://www.google.com/fonts.
+available from Google Fonts - google.com/fonts.
 Please see accompanying license.
 
-Sounds:
--------
-Background music: mouse organ#2 used by very kind permission of Timbre. 
-Distributed by http://freesound.org.
-
+Music: mouse organ#2 used by very kind permission of Timbre. 
+Distributed by freesound.org.
 All other sounds made with the bfxr sound creator
-http://www.bfxr.net/
+bfxr.net
 
 SPOTTED:
--------
-Fonts:
-------
-LuckiestGuyPrime8, based on Luckiest Guy by Brian J. Bonislawsky,
-available from Google Fonts https://www.google.com/fonts.
+Font: LuckiestGuyPrime8, based on Luckiest Guy by Brian J. Bonislawsky,
+available from Google Fonts google.com/fonts.
 Please see accompanying license.
 
-Sounds:
--------
-Background music: Bugout by Paul Ashby
-
+Music: Bugout by Paul Ashby
 All other sounds made with the bfxr sound creator
-http://www.bfxr.net/
+bfxr.net
 
 HOT LARVA:
-----------
-Fonts:
-------
-SlackeyPrime8, based on Slackey by Dave Cohen at Sideshow Foundry,
-available from Google Fonts https://www.google.com/fonts.
+Font: SlackeyPrime8, based on Slackey by Dave Cohen at Sideshow Foundry,
+available from Google Fonts - google.com/fonts.
 Please see accompanying license.
 
-Sounds
-------
-Background music: SpaceBallDownTheWell by symphoid.
-Distributed by http://freesound.org.
-This work is licensed under the Creative Commons 0 License
-http://creativecommons.org/publicdomain/zero/1.0/
-
+Music: SpaceBallDownTheWell by symphoid
 Pop sound: Pop 2 by greenvwbeetle.
-Distributed by http://freesound.org.
-This work is licensed under the Creative Commons 0 License
-http://creativecommons.org/publicdomain/zero/1.0/
-
 Sizzle sound: cig_extinguish by the_semen_incident.
-Distributed by http://freesound.org.
-This work is licensed under the Creative Commons 0 License
-http://creativecommons.org/publicdomain/zero/1.0/
-
 Dying laugh: Jared Helm by oldedgar.
-Distributed by http://freesound.org.
+Distributed by freesound.org.
 This work is licensed under the Creative Commons 0 License
-http://creativecommons.org/publicdomain/zero/1.0/
-
+creativecommons.org/publicdomain/zero/1.0
 Grunt sound, Yes!, hotfoot sound by Paul Ashby
-
 All other sounds made with the bfxr sound creator
-http://www.bfxr.net/
+bfxr.net

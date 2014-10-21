@@ -22,6 +22,7 @@ BasicGame.Preloader.prototype = {
 		this.load.audio('swoosh', ['assets/audio/primitive/swoosh.mp3', 'assets/audio/primitive/swoosh.ogg']);
 		
 		this.load.image('background','assets/' + BasicGame.screen + '/background.png');
+		this.load.image('creditsbg','assets/creditsbg.png');
 		this.load.image('logo','assets/' + BasicGame.screen + '/logo.png');
 		this.load.image('playBttn','assets/' + BasicGame.screen + '/playBttn.png');
 		this.load.image('next','assets/' + BasicGame.screen + '/next.png');
