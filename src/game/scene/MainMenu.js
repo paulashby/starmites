@@ -14,19 +14,10 @@ BasicGame.MainMenu.prototype = {
 		[ ['It\'s ants vs gravity and', 'the ants are losing. Use', 'your sense of timing to', 'save the little guys', 'from the frazzler!'], 'stackAntyGravity', 'http://www.primitive.co/antygravity/', 'ANTY GRAVITY:\rFonts: Lightdot 7x6 by very kind\rpermission of Melissa Fernandes,\ravailable from dafont.com\rBoogalooPrime8, based on Boogaloo by John Vargas Beltran,\ravailable from Google Fonts: google.com/fonts\rPlease see accompanying license.\rMusic: mouse organ#2 used by very kind permission of Timbre\rDistributed by freesound.org.\rAll other sounds created at bfxr.net'],
 		[ ['Baby grubs look cute,', 'but appearances can be', 'deceptive. Get them', 'before they get you!'], 'stackSpotted', 'http://www.primitive.co/spotted/', 'SPOTTED:\rFont: LuckiestGuyPrime8, based on Luckiest Guy\rby Brian J. Bonislawsky, available from\rGoogle Fonts: google.com/fonts\rPlease see accompanying license.\rMusic: Bugout by Paul Ashby.\rAll other sounds created at bfxr.net'],
 		[ ['This lively little larva,', 'he\'s too close to the lava,', 'if he persits with gem', 'based risks, he\'ll end', 'up a cadaver!'], 'stackHotLarva', 'http://www.primitive.co/hotlarva/', 'HOT LARVA:\rFont: SlackeyPrime8, based on Slackey\rby Dave Cohen at Sideshow Foundry,\ravailable from Google Fonts: google.com/fonts\rPlease see accompanying license.\rMusic: SpaceBallDownTheWell by symphoid\rPop sound: Pop 2 by greenvwbeetle\rSizzle sound: cig_extinguish by the_semen_incident\rDying laugh: Jared Helm by oldedgar\rThe above sounds distributed by freesound.org and\rlicensed under creativecommons.org/publicdomain/zero/1.0\rAdditional sounds created at bfxr.net']
-		];
-		// Add a nested credits group to the content for each game
-		// set the position of all elements as they will view, then move credits group down
-		// Add a toggle function to the bg panel of this group - clicking anywhere inside it will open/close it...
-		// this can scroll with the rest of the game info.
-		// the credits label stays where it is, so is NOT added in the group -
-		// can either add the credits string to the background and set it on demand - the sprite will be passed as target object to the event handler,
-		// or just set it to begin with - I think this way is best.
-		// 
-		//Keep the next button in position and use it to scroll to credits for star mites
-		
+		];		
 		this.bundleCreditsTxt = 
 		'STAR MITES\rFonts:\rLilitaPrime8, based on Lilita by Juan Montoreano,\ravailable from Google Fonts: google.com/fonts.\rPlease see accompanying license.\rSwoosh sound: Multiple Swooshes by lsprings\rThe above sound distributed by freesound.org and\rlicensed under creativecommons.org/publicdomain/zero/1.0\rAll games created with Phaser HTML5 game framework.\rPhaser copyright (c) 2014 Richard Davey, Photon Storm Ltd.\rPhaser is released under the MIT License:\ropensource.org/licenses/MIT';
+		
 		this.textX = undefined;
 		this.lineHeight = undefined;
 		
@@ -60,9 +51,7 @@ BasicGame.MainMenu.prototype = {
 			// Create a reference to the nested group
 			this.gameGroups[i].gameInfo = this.gameGroups[i].getTop();
 			
-			
 			this.gameGroups[i].gameInfo.name = 'gameInfo';
-			
 			
 			this.setGameText(i);
 
@@ -135,9 +124,6 @@ BasicGame.MainMenu.prototype = {
 		
 		this.initCredits(i);
 	},
-	
-	
-	
 	initCredits: function(gameNum) {
 		this.makeCreditGroups(gameNum);
 		this.setCreditContent(gameNum, this.gameGroups[gameNum].gameCredits.currGameCredits);
@@ -209,12 +195,6 @@ BasicGame.MainMenu.prototype = {
 		tweenedGroup.bringToTop(justViewed);
 		this.swoosh.play();
 	},
-	onNextTweenComplete_old: function() {
-		var justViewed = this.allGames.getBottom();
-		justViewed.x += this.gameAssets.length * BasicGame.gameWidth;
-		this.allGames.bringToTop(justViewed);
-		this.swoosh.play();
-	},
 	onCreditPanelTap: function(creditsPanel) {
 		// ========================
 		// = Toggles credit panel =
@@ -223,23 +203,35 @@ BasicGame.MainMenu.prototype = {
 			this.creditsLabel.visible = false;
 			creditsPanel.parent.parent.parent.bringToTop(creditsPanel.parent.parent);
 			this.creditsPanelOnTween = this.game.add.tween(creditsPanel.parent.parent).to({y: -BasicGame.viewHeight}, 150, Phaser.Easing.Cubic.InOut, true);
+			this.creditsPanelOnTween.onComplete.add(function() { this.swoosh.play(); }, this);
 		}
 		else{
 			this.creditsPanelOffTween = this.game.add.tween(creditsPanel.parent.parent).to({y: 0}, 150, Phaser.Easing.Cubic.InOut, true);
 			this.creditsPanelOffTween.onComplete.add(function() { this.creditsLabel.visible = true; creditsPanel.parent.parent.parent.bringToTop(creditsPanel.parent.parent.parent.gameInfo); }, this);
 			if(creditsPanel.parent.parent.getAt(0) === creditsPanel.parent.parent.bundleCredits){
-				//this.resetCredits(creditsPanel);
 				this.onNextTweenComplete(creditsPanel.parent.parent);
 				creditsPanel.parent.parent.x -= BasicGame.viewWidth;
 			}
+			else{
+				this.creditsPanelOffTween.onComplete.add(function() { this.swoosh.play(); }, this);
+			}
 		}
-	},
-	resetCredits: function(creditsPanel) {
-		
 	},
 	onPlay: function(eTarget) { 
 		window.location.href = eTarget.gameURL;
 	},
+	removeSound: function(_sound) {
+		_sound.stop();
+		_sound = null;		
+	},
 	shutdown: function(){
-	}
+		this.background.destroy();
+		this.allGames.destroy();
+		this.gameGroups.destroy();
+		this.gameDetails.destroy();
+		this.nextBttn.destroy();
+		this.creditsLabel.destroy();
+		this.logo.destroy();
+		this.removeSound(this.swoosh);
+	},
 };
