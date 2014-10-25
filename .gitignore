@@ -2,3 +2,7 @@ masters/
 src/lib
 removedCode.js
 starmites.tmproj
+src/game/scene/Boot.min.js
+src/game/scene/MainMenu.min.js
+src/game/scene/Preloader.min.js
+src/game/scene/Title.min.js
