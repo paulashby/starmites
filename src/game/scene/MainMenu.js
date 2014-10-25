@@ -88,6 +88,32 @@ BasicGame.MainMenu.prototype = {
 		this.nextBttn = this.game.add.sprite(BasicGame.gameWidth * 0.9, BasicGame.viewY + BasicGame.viewHeight * 0.1, 'next');
 		this.nextBttn.inputEnabled = true; 
 		this.nextBttn.events.onInputDown.add(this.onNext, this);
+		
+		
+		this.logoTweenIn = this.addTransitionTween(this.logo, false, true);
+		this.logoTweenIn.onComplete.add(function() { this.swoosh.play(); }, this);
+		this.nextBttnTweenIn = this.addTransitionTween(this.nextBttn, false, true);
+		this.allGamesTweenIn = this.addTransitionTween(this.allGames, true, true);
+		this.creditsLabelTweenIn = this.addTransitionTween(this.creditsLabel, true, true);
+
+		this.logoTweenIn.start();
+		this.nextBttnTweenIn.start();
+		this.allGamesTweenIn.start();
+		this.creditsLabelTweenIn.start();		
+	},
+	addTransitionTween: function(tweenedObj, tweenUp, entryTween) {
+		var transTween = this.add.tween(tweenedObj);
+		var tweenDir = tweenUp ? -1 : 1;
+		var y1dir = entryTween ? tweenDir : tweenDir * -1; 
+		var tweenY1 = tweenedObj.y + (BasicGame.gameHeight * 0.1 * y1dir);
+		var tweenY2 = entryTween ? tweenedObj.y : (BasicGame.gameHeight + tweenedObj.height) * tweenDir;
+		var tweenDuration = 150;
+		transTween.to( { y: tweenY1}, tweenDuration*2, Phaser.Easing.Quadratic.InOut)
+	  .to( { y: tweenY2 }, tweenDuration, Phaser.Easing.Quadratic.InOut);
+		if(entryTween){
+			tweenedObj.y = (BasicGame.gameHeight + tweenedObj.height) * - tweenDir;
+		}
+		return transTween;		
 	},
 	setGameText: function(gameNum) {
 		
@@ -223,7 +249,14 @@ BasicGame.MainMenu.prototype = {
 	removeSound: function(_sound) {
 		_sound.stop();
 		_sound = null;		
-	},
+	},	
+	removeTween: function(_tween) {
+		if (_tween) {
+			_tween.onComplete.removeAll();
+			_tween.stop();
+			_tween = null;
+		}
+	},	
 	shutdown: function(){
 		this.background.destroy();
 		this.allGames.destroy();
@@ -232,6 +265,10 @@ BasicGame.MainMenu.prototype = {
 		this.nextBttn.destroy();
 		this.creditsLabel.destroy();
 		this.logo.destroy();
+		this.removeTween(this.logoTweenIn);
+		this.removeTween(this.nextBttnTweenIn);
+		this.removeTween(this.allGamesTweenIn);
+		this.removeTween(this.creditsLabelTweenIn);
 		this.removeSound(this.swoosh);
 	},
 };

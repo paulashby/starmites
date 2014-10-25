@@ -23,6 +23,7 @@ BasicGame.Preloader.prototype = {
 		
 		this.load.image('background','assets/' + BasicGame.screen + '/background.png');
 		this.load.image('creditsbg','assets/creditsbg.png');
+		this.load.image('logoMain','assets/' + BasicGame.screen + '/logoMain.png');
 		this.load.image('logo','assets/' + BasicGame.screen + '/logo.png');
 		this.load.image('playBttn','assets/' + BasicGame.screen + '/playBttn.png');
 		this.load.image('next','assets/' + BasicGame.screen + '/next.png');
@@ -33,7 +34,7 @@ BasicGame.Preloader.prototype = {
 
 	create: function () {
 		this.ready = true;
-		this.state.start('MainMenu');
+		this.state.start('Title');
 	},
 
 	update: function () {
@@ -41,7 +42,7 @@ BasicGame.Preloader.prototype = {
 		if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
 		{
 			this.ready = true;
-			this.state.start('MainMenu');
+			this.state.start('Title');
 		}
 
 	}
