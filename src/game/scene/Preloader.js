@@ -20,6 +20,7 @@ BasicGame.Preloader.prototype = {
 		this.load.bitmapFont('LilitaPrime8', 'assets/' + BasicGame.screen + '/LilitaPrime8/LilitaPrime8.png', 'assets/' + BasicGame.screen + '/LilitaPrime8/LilitaPrime8.fnt');
 		
 		this.load.audio('swoosh', ['assets/audio/primitive/swoosh.mp3', 'assets/audio/primitive/swoosh.ogg']);
+		this.load.audio('woosh', ['assets/audio/primitive/woosh.mp3', 'assets/audio/primitive/woosh.ogg']);
 		
 		this.load.image('background','assets/' + BasicGame.screen + '/background.png');
 		this.load.image('creditsbg','assets/creditsbg.png');

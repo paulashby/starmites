@@ -8,7 +8,7 @@ BasicGame.Title = function (game) {
 BasicGame.Title.prototype = {
 
 	create: function () {
-		this.swoosh = this.game.add.audio('swoosh');
+		this.woosh = this.game.add.audio('woosh');
 		
 		this.background = this.game.add.sprite(0,0, 'background');
 		this.logoMain = this.game.add.sprite(BasicGame.gameWidth * 0.49, BasicGame.viewHeight * 0.43, 'logoMain');
@@ -34,7 +34,7 @@ BasicGame.Title.prototype = {
 		this.fgElementsTweenOut._lastChild.onComplete.add(function() { this.game.state.start('MainMenu'); }, this);
 		
 		this.fgElementsTweenIn = this.addTransitionTween(this.foregroundElements, true, true);
-		this.fgElementsTweenIn.onComplete.add(function() { this.swoosh.play(); }, this);
+		this.fgElementsTweenIn.onComplete.add(function() { this.woosh.play(); }, this);
 			
 		this.fgElementsTweenIn.start();		
 	},
@@ -69,7 +69,7 @@ BasicGame.Title.prototype = {
 	shutdown: function(){
 		this.background.destroy();
 		this.foregroundElements.destroy(true);
-		this.removeSound(this.swoosh);
+		this.removeSound(this.woosh);
 		this.removeTween(this.fgElementsTweenIn);
 		this.removeTween(this.fgElementsTweenOut);
 	},
