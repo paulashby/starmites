@@ -11,16 +11,17 @@ BasicGame.MainMenu.prototype = {
 		this.CREDITS_OFF_Y = BasicGame.viewHeight * 0.91;
 		
 		this.gameAssets = [ 
-		[ ['It\'s ants vs gravity and', 'the ants are losing. Use', 'your sense of timing to', 'save the little guys', 'from the frazzler!'], 'stackAntyGravity', 'http://www.primitive.co/antygravity/', 'ANTY GRAVITY:\rFonts: Lightdot 7x6 by very kind\rpermission of Melissa Fernandes,\ravailable from dafont.com\rBoogalooPrime8, based on Boogaloo by John Vargas Beltran,\ravailable from Google Fonts: google.com/fonts\rPlease see accompanying license.\rMusic: mouse organ#2 used by very kind permission of Timbre\rDistributed by freesound.org.\rAll other sounds created at bfxr.net'],
-		[ ['Baby grubs look cute,', 'but appearances can be', 'deceptive. Get them', 'before they get you!'], 'stackSpotted', 'http://www.primitive.co/spotted/', 'SPOTTED:\rFont: LuckiestGuyPrime8, based on Luckiest Guy\rby Brian J. Bonislawsky, available from\rGoogle Fonts: google.com/fonts\rPlease see accompanying license.\rMusic: Bugout by Paul Ashby.\rAll other sounds created at bfxr.net'],
-		[ ['This lively little larva,', 'he\'s too close to the lava,', 'if he persits with gem', 'based risks, he\'ll end', 'up a cadaver!'], 'stackHotLarva', 'http://www.primitive.co/hotlarva/', 'HOT LARVA:\rFont: SlackeyPrime8, based on Slackey\rby Dave Cohen at Sideshow Foundry,\ravailable from Google Fonts: google.com/fonts\rPlease see accompanying license.\rMusic: SpaceBallDownTheWell by symphoid\rPop sound: Pop 2 by greenvwbeetle\rSizzle sound: cig_extinguish by the_semen_incident\rDying laugh: Jared Helm by oldedgar\rThe above sounds distributed by freesound.org and\rlicensed under creativecommons.org/publicdomain/zero/1.0\rAdditional sounds created at bfxr.net']
-		];		
+		[ ['It\'s ants vs gravity and', 'the ants are losing. Use', 'your sense of timing to', 'save the little guys', 'from the frazzler!'], 'stackAntyGravity', 'http://www.primitive.co/antygravity/', 'ANTY GRAVITY:\rFonts: Lightdot 7x6 by very kind\rpermission of Melissa Fernandes,\ravailable from dafont.com\rBoogalooPrime8, based on Boogaloo by John Vargas Beltran,\ravailable from Google Fonts: google.com/fonts\rLicense: primitive.co/fntl/BoogalooPrime8/OFL.html\rMusic: mouse organ#2 used by very kind permission of Timbre\rDistributed by freesound.org.\rAll other sounds created at bfxr.net'],
+		[ ['Baby grubs look cute,', 'but appearances can be', 'deceptive. Get them', 'before they get you!'], 'stackSpotted', 'http://www.primitive.co/spotted/', 'SPOTTED:\rFont: LuckiestGuyPrime8, based on Luckiest Guy\rby Brian J. Bonislawsky, available from\rGoogle Fonts: google.com/fonts\rLicense: primitive.co/fntl/LuckiestGuyPrime8/apache2.html\rMusic: Bugout by Paul Ashby.\rAll other sounds created at bfxr.net'],
+		[ ['Help the little larva,', 'collect the hidden gems', 'but watch out he doesn\'t', 'end up IN the lava!'], 'stackHotLarva', 'http://www.primitive.co/hotlarva/', 'HOT LARVA:\rFont: SlackeyPrime8, based on Slackey\rby Dave Cohen at Sideshow Foundry,\ravailable from Google Fonts: google.com/fonts\rLicense: primitive.co/fntl/SlackeyPrime8/apache2.html\rMusic: SpaceBallDownTheWell by symphoid\rPop sound: Pop 2 by greenvwbeetle\rSizzle sound: cig_extinguish by the_semen_incident\rDying laugh: Jared Helm by oldedgar\rThe above sounds distributed by freesound.org and\rlicensed under creativecommons.org/publicdomain/zero/1.0\rAdditional sounds created at bfxr.net']
+		];
 		this.bundleCreditsTxt = 
-		'STAR MITES\rFonts:\rLilitaPrime8, based on Lilita by Juan Montoreano,\ravailable from Google Fonts: google.com/fonts.\rPlease see accompanying license.\rSwoosh sound: Multiple Swooshes by lsprings\rThe above sound distributed by freesound.org and\rlicensed under creativecommons.org/publicdomain/zero/1.0\rAll games created with Phaser HTML5 game framework.\rPhaser copyright (c) 2014 Richard Davey, Photon Storm Ltd.\rPhaser is released under the MIT License:\ropensource.org/licenses/MIT';
+		'STAR MITES\rFonts:\rLilitaPrime8, based on Lilita by Juan Montoreano,\ravailable from Google Fonts: google.com/fonts.\rLicense: primitive.co/fntl/LilitaPrime8/OFL.html\rSwoosh sound: Multiple Swooshes by lsprings\rThe above sound distributed by freesound.org and\rlicensed under creativecommons.org/publicdomain/zero/1.0\rAll games created with Phaser HTML5 game framework.\rPhaser copyright (c) 2014 Richard Davey, Photon Storm Ltd.\rPhaser is released under the MIT License:\ropensource.org/licenses/MIT';
 		
 		this.textX = undefined;
 		this.lineHeight = undefined;
 		
+		this.woosh = this.game.add.audio('woosh');
 		this.swoosh = this.game.add.audio('swoosh');
 		
 		this.background = this.game.add.sprite(0,0, 'background');
@@ -91,7 +92,7 @@ BasicGame.MainMenu.prototype = {
 		
 		
 		this.logoTweenIn = this.addTransitionTween(this.logo, false, true);
-		this.logoTweenIn.onComplete.add(function() { this.swoosh.play(); }, this);
+		this.logoTweenIn.onComplete.add(function() { this.woosh.play(); }, this);
 		this.nextBttnTweenIn = this.addTransitionTween(this.nextBttn, false, true);
 		this.allGamesTweenIn = this.addTransitionTween(this.allGames, true, true);
 		this.creditsLabelTweenIn = this.addTransitionTween(this.creditsLabel, true, true);
@@ -269,6 +270,7 @@ BasicGame.MainMenu.prototype = {
 		this.removeTween(this.nextBttnTweenIn);
 		this.removeTween(this.allGamesTweenIn);
 		this.removeTween(this.creditsLabelTweenIn);
+		this.removeSound(this.woosh);
 		this.removeSound(this.swoosh);
 	},
 };
