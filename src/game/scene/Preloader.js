@@ -35,17 +35,18 @@ BasicGame.Preloader.prototype = {
 
 	create: function () {
 		this.ready = true;
-		this.state.start('Title');
-	},
-
-	update: function () {
-
-		if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
-		{
-			this.ready = true;
+		var referringPg = document.referrer;
+		if (referringPg && this.justPlayed(referringPg)) {
+			this.state.start('MainMenu');
+		}
+		else{
 			this.state.start('Title');
 		}
-
+	},
+	justPlayed: function(referringPg) {
+		return 	referringPg == 'http://www.primitive.co/games/antygravity/' ||
+						referringPg == 'http://www.primitive.co/games/spotted/' ||
+						referringPg == 'http://www.primitive.co/games/hotlarva/';
 	}
 
 };
