@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Star Mites</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="chrome=1, IE=9">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="HandheldFriendly" content="true" />
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,21 +35,20 @@
 	<link rel="apple-touch-icon" sizes="256x256" href="icons/app_icon_256x256.png">
 	<link rel="apple-touch-icon" sizes="512x512" href="icons/app_icon_512x512.png">
 	<link rel="apple-touch-icon" sizes="1024x1024" href="icons/app_icon_1024x1024.png">
-	<link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-	
+	<link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
 	<script src="//html5sdk.galaxy.gs/PSGN.js" data-app_id="8408"></script>
 	<script>
 	    window.addEventListener('DOMContentLoaded', function(){
 	        // The SDK is now available for use
-	       $pp.PSGN.Ui.icon("bottomleft");  //This handles the Playphone Icon position
+	       $pp.PSGN.Ui.icon("topleft");  //This handles the Playphone Icon position
 	    }, false);
 	</script>	
 	<script src="src/lib/phaser.min.js"></script>
 	<script src="src/lib/ScaleManager2.min.js"></script>
-	<script src="src/game/scene/Boot.min.js"></script>
-	<script src="src/game/scene/Preloader.min.js"></script>
-	<script src="src/game/scene/Title.min.js"></script>
-	<script src="src/game/scene/MainMenu.min.js"></script>
+	<script src="src/game/scene/Boot.js"></script>
+	<script src="src/game/scene/Preloader.js"></script>
+	<script src="src/game/scene/Title.js"></script>
+	<script src="src/game/scene/MainMenu.js"></script>
 		
 </head>
 <body>
@@ -61,53 +60,68 @@
 
 (function () {
 	
-	var NUM_SCREEN_SIZES = 5;
+	"use strict";
 	
-	BasicGame.screen = "small";
-	BasicGame.srx = Math.max(window.innerWidth,window.innerHeight);
-	BasicGame.sry = Math.min(window.innerWidth,window.innerHeight);
+	PrimeEight.StarMites.screen = "small";
+	PrimeEight.StarMites.srx = Math.max(window.innerWidth,window.innerHeight);
+	PrimeEight.StarMites.sry = Math.min(window.innerWidth,window.innerHeight);
 	
-	BasicGame.logicWidth = 480;
-	BasicGame.logicHeight = 320;
+	PrimeEight.StarMites.logicWidth = 480;
+	PrimeEight.StarMites.logicHeight = 320;
 	
-	var r = BasicGame.logicWidth/BasicGame.logicHeight;
-	
+	var r = PrimeEight.StarMites.logicWidth/PrimeEight.StarMites.logicHeight,
 	// store asset dimensions as key/value pairs
 	// Using normal screen size for value
-	var assetListing = [
+	assetListing = [
 		['fntSize', 18.5] 
-	];
+	],
+	device,
+	scaleFactor,
+	game;
+	
+	function setLarge(){
+		PrimeEight.StarMites.screen = "large";
+		PrimeEight.StarMites.gameWidth = 720;		
+	} 
 
-  if(BasicGame.srx >= 360){
-		BasicGame.screen = "small";
-		BasicGame.gameWidth = 360;
+	// Adjusts asset sizes according to scaleFactor and assigns to variables in PrimeEight.StarMites
+	function assignAssetSizes(scaleFactor, assetListing){
+		var len = assetListing.length,
+		i;
+		for (i = 0; i < len; i++){
+			PrimeEight.StarMites[ assetListing[i][0] ] = Math.floor(assetListing[i][1] * scaleFactor);
+		}
 	}
-	if(BasicGame.srx >= 480){
-		BasicGame.screen = "normal";
-		BasicGame.gameWidth = 480;
+
+  if(PrimeEight.StarMites.srx >= 360){
+		PrimeEight.StarMites.screen = "small";
+		PrimeEight.StarMites.gameWidth = 360;
 	}
-	if(BasicGame.srx >= 720){
+	if(PrimeEight.StarMites.srx >= 480){
+		PrimeEight.StarMites.screen = "normal";
+		PrimeEight.StarMites.gameWidth = 480;
+	}
+	if(PrimeEight.StarMites.srx >= 720){
 		setLarge();
 	}
-	if(BasicGame.srx >= 960){
-		BasicGame.screen = "xlarge";
-		BasicGame.gameWidth = 960;
+	if(PrimeEight.StarMites.srx >= 960){
+		PrimeEight.StarMites.screen = "xlarge";
+		PrimeEight.StarMites.gameWidth = 960;
 	}
-	if(BasicGame.srx >= 1440){
-		BasicGame.screen = "xxlarge";
-		BasicGame.gameWidth = 1440;
+	if(PrimeEight.StarMites.srx >= 1440){
+		PrimeEight.StarMites.screen = "xxlarge";
+		PrimeEight.StarMites.gameWidth = 1440;
 	}
 	
-	var device = new Phaser.Device();
+	device = new Phaser.Device();
 	if(device.desktop){
-		BasicGame.desktop = true;
-		BasicGame.desktopScale = 1.5;
+		PrimeEight.StarMites.desktop = true;
+		PrimeEight.StarMites.desktopScale = 1.5;
 		setLarge();
 	}
 	device = null;
 	
-	var scaleFactor;
-	switch(BasicGame.screen){
+	switch(PrimeEight.StarMites.screen){
 		case 'small':
 		scaleFactor = 0.75;
 		break;
@@ -125,35 +139,21 @@
 		break;
 		
 		default:
-		scaleFactor = 3			
+		scaleFactor = 3;			
 	}
 	assignAssetSizes(scaleFactor, assetListing);
 	
-	BasicGame.gameHeight = BasicGame.gameWidth/r;
+	PrimeEight.StarMites.gameHeight = PrimeEight.StarMites.gameWidth/r;
 	
-	var game = new Phaser.Game(BasicGame.gameWidth,BasicGame.gameHeight, Phaser.AUTO, 'game');
+	game = new Phaser.Game(PrimeEight.StarMites.gameWidth,PrimeEight.StarMites.gameHeight, Phaser.AUTO, 'game');
 	
-	game.state.add('Boot', BasicGame.Boot);
-	game.state.add('Preloader', BasicGame.Preloader);
-	game.state.add('Title', BasicGame.Title);
-	game.state.add('MainMenu', BasicGame.MainMenu);
+	game.state.add('Boot', PrimeEight.StarMites.Boot);
+	game.state.add('Preloader', PrimeEight.StarMites.Preloader);
+	game.state.add('Title', PrimeEight.StarMites.Title);
+	game.state.add('MainMenu', PrimeEight.StarMites.MainMenu);
   
 	game.state.start('Boot');
-
-})();
-
-function setLarge(){
-	BasicGame.screen = "large";
-	BasicGame.gameWidth = 720;		
-}; 
-
-// Adjusts asset sizes according to scaleFactor and assigns to variables in BasicGame
-function assignAssetSizes(scaleFactor, assetListing){
-	var len = assetListing.length;
-	for (var i = 0; i < len; i++){
-		BasicGame[ assetListing[i][0] ] = Math.floor(assetListing[i][1] * scaleFactor);
-	}
-}
+}());
 
 </script>
 
